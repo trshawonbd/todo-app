@@ -1,16 +1,49 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+
 
 const AddTask = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const onSubmit = async data => {
+    const onSubmit = async ( data, e) => {
         console.log(data)
         /* navigate('/appointment'); */
+
+        const task ={
+            taskName: data.title,
+            taskDescription: data.description,
+        }
+        reset();
+
+        fetch(`http://localhost:5000/task`,{
+            method: "POST",
+            headers: {
+                'content-type' : 'application/json',
+                
+            },
+            body: JSON.stringify(task)
+        })
+        .then(res => res.json())
+                .then (data => {
+                    console.log('Inserted', data);
+                    if (data.insertedId){
+                        toast.success(`Task is added successfully`);
+                        
+                    }
+                    else{
+                        toast.error("Something went wrong, please try again")
+                        
+                    }
+                })
        
         
     
     }
+
+
+
+
     return (
         <div>
             
@@ -27,9 +60,10 @@ const AddTask = () => {
                             <span className="label-text">Task Title</span>
                         </label>
                         <input type="text"
+                        name='title'
                             placeholder="Gist of Your Task"
                             className="input input-bordered w-full max-w-xs"
-                            {...register("name", {
+                            {...register("title", {
                                 required:{
                                     value: true,
                                     message: 'Name is required'
@@ -48,6 +82,7 @@ const AddTask = () => {
                         </label>
                         <textarea 
                         type="text"
+                        name='description'
                         class="textarea w-full max-w-xs textarea-bordered h-24"
                          placeholder="Description"
                         

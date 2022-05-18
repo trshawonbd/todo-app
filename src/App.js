@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import AddTask from './Pages/Dashboard/AddTask';
 import AllTasks from './Pages/Dashboard/AllTasks';
@@ -6,6 +8,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/Login/SignUp';
 import Navbar from './Pages/Navbar/Navbar';
+
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<SignUp></SignUp>} />
         </Routes>
+        <ToastContainer></ToastContainer>
         
     </div>
   );
