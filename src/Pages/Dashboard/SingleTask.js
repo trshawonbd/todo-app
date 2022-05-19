@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SingleTask = ({ index, singleTask, refetch, setDeleting }) => {
+const SingleTask = ({ index, singleTask, refetch,setCompleting, setDeleting }) => {
     const{taskName, taskDescription} = singleTask
     return (
         <tr>
@@ -8,7 +8,7 @@ const SingleTask = ({ index, singleTask, refetch, setDeleting }) => {
             <td>{taskName}</td>
             <td>{taskDescription}</td>
             <td>
-            <label  onClick={() => setDeleting(singleTask)}  for="confirm-modal-complete" class="btn btn-success btn-xs">Complete</label>
+            <label  onClick={() => setCompleting(singleTask)}  for="confirm-modal-complete" class="btn btn-success btn-xs">Complete</label>
 
             </td>
 

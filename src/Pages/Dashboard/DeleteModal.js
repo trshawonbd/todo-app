@@ -24,10 +24,6 @@ const DeleteModal = ({deleting, refetch, setDeleting}) => {
     }
     return (
         <div>
-            {/* <!-- The button to open modal --> */}
-            
-
-            {/* <!-- Put this part before </body> tag-- > */}
             <input type="checkbox" id="confirm-modal-delete" class="modal-toggle" />
             <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">

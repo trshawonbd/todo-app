@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
+import CompleteModal from './CompleteModal';
 import DeleteModal from './DeleteModal';
 import SingleTask from './SingleTask';
 
 const AllTasks = () => {
     const [deleting, setDeleting] = useState(null);
+    const [completing, setCompleting] = useState(null);
     const { data: tasks, isLoading, refetch } = useQuery('tasks', () => fetch('http://localhost:5000/task', {
 
     }).then(res => res.json()))
@@ -38,7 +40,7 @@ const AllTasks = () => {
                                 singleTask={singleTask}
                                 refetch={refetch}
                                 setDeleting = {setDeleting}
-                                
+                                setCompleting = {setCompleting}
                             ></SingleTask>)
                         }
 
@@ -52,6 +54,15 @@ const AllTasks = () => {
                 refetch={refetch}
                 setDeleting = {setDeleting}
                 ></DeleteModal>
+            }
+            {
+                completing && <CompleteModal
+                completing={completing}
+                refetch={refetch}
+                setCompleting = {setCompleting}
+                
+                tasks ={tasks}
+                ></CompleteModal>
             }
         </div>
     );
